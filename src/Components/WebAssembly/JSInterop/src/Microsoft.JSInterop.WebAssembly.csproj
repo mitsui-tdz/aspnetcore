@@ -12,4 +12,8 @@
     <Reference Include="Microsoft.JSInterop" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="$(SharedSourceRoot)JSInterop\*.cs" />
+  </ItemGroup>
+
 </Project>

@@ -17,7 +17,7 @@ namespace Microsoft.JSInterop
         /// </summary>
         protected JSInProcessRuntime()
         {
-            JsonSerializerOptions.Converters.Add(new JSObjectReferenceJsonConverter<JSInProcessObjectReference>(
+            JsonSerializerOptions.Converters.Add(new JSObjectReferenceJsonConverter<IJSInProcessObjectReference, JSInProcessObjectReference>(
                 id => new JSInProcessObjectReference(this, id)));
         }
 
@@ -26,7 +26,7 @@ namespace Microsoft.JSInterop
             var resultJson = InvokeJS(
                 identifier,
                 JsonSerializer.Serialize(args, JsonSerializerOptions),
-                ResultTypeFromGeneric<TValue>(),
+                JSCallResultTypeHelper.FromGeneric<TValue>(),
                 targetInstanceId);
 
             // While the result of deserialization could be null, we're making a
